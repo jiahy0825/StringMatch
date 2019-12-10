@@ -1,6 +1,6 @@
 #include "StringMatch.h"
 
-class BM
+class BM : StringMatch
 {
 public:
 	BM();

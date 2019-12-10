@@ -1,6 +1,6 @@
 #include "StringMatch.h"
 
-class BruteForce
+class BruteForce : StringMatch
 {
 public:
 	BruteForce();

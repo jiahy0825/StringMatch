@@ -72,6 +72,7 @@
     <ClCompile Include="BruteForce.cpp" />
     <ClCompile Include="KMP.cpp" />
     <ClCompile Include="StringMatch.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

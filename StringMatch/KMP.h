@@ -1,6 +1,6 @@
 #include "StringMatch.h"
 
-class KMP
+class KMP : StringMatch
 {
 public:
 	KMP();
