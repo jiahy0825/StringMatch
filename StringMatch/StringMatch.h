@@ -10,7 +10,7 @@ public:
 	StringMatch();
 	~StringMatch();
 
-	//virtual std::vector<int> match(std::string& p, std::string& t);
+	virtual std::vector<int> match(std::string& p, std::string& t) = 0;
 };
 
 #endif

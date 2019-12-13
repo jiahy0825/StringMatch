@@ -35,8 +35,23 @@ void computeBMBC(string& p){
 void computeOSUFF(string& p){
 	int m = p.length();
 	Osuff = vector<int>(m, 0);
-
-
+	int start, end;
+	Osuff[m - 1] = m;
+	start = m - 1;
+	for(int i = m - 2;i >= 0;i--){
+		if (i > start && Osuff[m - 1 - (end - i)] < i - start){
+			Osuff[i] = Osuff[m - 1 - (end - i)];
+		}else{
+			if (i < start){
+				start = i;
+			}
+			end = i;
+			while (start >= 0 && p[start] == p[m - 1 - (end - start)]){
+				start--;
+			}
+			Osuff[i] = end - start;
+		}
+	}
 }
 
 void computeBMGS(string& p){
@@ -44,8 +59,23 @@ void computeBMGS(string& p){
 	computeOSUFF(p);
 	bmGs.clear();
 	bmGs = vector<int>(m, m);
-
-
+	for (int i = 0;i < m;i++){
+		bmGs[i] = m;
+	}
+	int j = 0;
+	for (int i = m - 1;i >= 0;i--){
+		if (Osuff[i] == i + 1){
+			while (j < m - i - 1){
+				if (bmGs[j] == m){
+					bmGs[j] = m - i - 1;
+				}
+				j++;
+			}
+		}
+	}
+	for (int i = 0;i <= m - 2;i++){
+		bmGs[m - 1 - Osuff[i]] = m - 1 - i;
+	}
 }
 
 void init_sigma(){
@@ -63,8 +93,6 @@ void init_sigma(){
 	}
 }
 
-
-
 vector<int> BM::match(string& p, string& t){
 	vector<int> res;
 	int n = t.length();
@@ -80,11 +108,12 @@ vector<int> BM::match(string& p, string& t){
 		while (p[i] == t[s + i]){
 			if (i == 0){
 				res.push_back(s);
+				break;
 			}else{
 				i--;
 			}
 		}
-		s += max(bmGs[i], bmBc[t[s + i]] - m + i - 1);
+		s += max(bmGs[i], bmBc[t[s + i]] - m + i + 1);
 	}
 	return res;
 }
