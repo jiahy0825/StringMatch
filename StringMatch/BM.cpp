@@ -1,6 +1,10 @@
 #include "BM.h"
 
+#include <iostream>
 #include <vector>
+#include <map>
+#include <string>
+#include <cstring>
 
 using namespace std;
 
@@ -12,7 +16,75 @@ BM::~BM()
 {
 }
 
-std::vector<int> BM::match(std::string& p, std::string& t){
+vector<char> sigma;
+map<char, int> bmBc;
+vector<int> Osuff;
+vector<int> bmGs;
 
-	return vector<int>(5, 0);
+void computeBMBC(string& p){
+	bmBc.clear();
+	int m = p.length();
+	for (char c : sigma){
+		bmBc[c] = m;
+	}
+	for (int i = 0;i < m - 1;i++){
+		bmBc[p[i]] = m - i - 1;
+	}
+}
+
+void computeOSUFF(string& p){
+	int m = p.length();
+	Osuff = vector<int>(m, 0);
+
+
+}
+
+void computeBMGS(string& p){
+	int m = p.length();
+	computeOSUFF(p);
+	bmGs.clear();
+	bmGs = vector<int>(m, m);
+
+
+}
+
+void init_sigma(){
+	char ch[28] = {',', '.', '<', '>', '?', ';', ':', '[', ']', '{', '}', 
+		'-', '+', '_', '=', '|', '(', ')', '*', '&', '^', '%', '$', '#', '@', '!', '~', '`'};
+	sigma = vector<char>(ch, ch + 28);
+	for (char c = 'a'; c <= 'z'; c++){
+		sigma.push_back(c);
+	}
+	for (char c = 'A'; c <= 'Z'; c++){
+		sigma.push_back(c);
+	}
+	for (char c = '0'; c <= '9'; c++){
+		sigma.push_back(c);
+	}
+}
+
+
+
+vector<int> BM::match(string& p, string& t){
+	vector<int> res;
+	int n = t.length();
+	int m = p.length();
+	init_sigma();
+	computeBMBC(p);
+	computeBMGS(p);
+
+	int i = m - 1;
+	int s = 0;
+	while (s <= n - m){
+		i = m - 1;
+		while (p[i] == t[s + i]){
+			if (i == 0){
+				res.push_back(s);
+			}else{
+				i--;
+			}
+		}
+		s += max(bmGs[i], bmBc[t[s + i]] - m + i - 1);
+	}
+	return res;
 }
