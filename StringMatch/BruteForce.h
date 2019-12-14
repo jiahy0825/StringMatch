@@ -1,6 +1,7 @@
-#include "StringMatch.h"
+#include "stdafx.h"
+#include "StringMatchAlgorithm.h"
 
-class BruteForce : StringMatch
+class BruteForce : StringMatchAlgorithm
 {
 public:
 	BruteForce();

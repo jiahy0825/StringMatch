@@ -1,6 +1,7 @@
-#include "StringMatch.h"
+#include "stdafx.h"
+#include "StringMatchAlgorithm.h"
 
-class KMP : StringMatch
+class KMP : StringMatchAlgorithm
 {
 public:
 	KMP();

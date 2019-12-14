@@ -1,6 +1,7 @@
-#include "StringMatch.h"
+#include "stdafx.h"
+#include "StringMatchAlgorithm.h"
 
-class BM : StringMatch
+class BM : StringMatchAlgorithm
 {
 public:
 	BM();

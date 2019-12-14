@@ -1,16 +1,32 @@
-#ifndef STRING_MATCH_H
-#define STRING_MATCH_H
 
-#include <string>
-#include <vector>
+// StringMatch.h : PROJECT_NAME 应用程序的主头文件
+//
 
-class StringMatch
+#pragma once
+
+#ifndef __AFXWIN_H__
+	#error "在包含此文件之前包含“stdafx.h”以生成 PCH 文件"
+#endif
+
+#include "resource.h"		// 主符号
+
+
+// CStringMatchApp:
+// 有关此类的实现，请参阅 StringMatch.cpp
+//
+
+class CStringMatchApp : public CWinApp
 {
 public:
-	StringMatch();
-	~StringMatch();
+	CStringMatchApp();
 
-	virtual std::vector<int> match(std::string& p, std::string& t) = 0;
+// 重写
+public:
+	virtual BOOL InitInstance();
+
+// 实现
+
+	DECLARE_MESSAGE_MAP()
 };
 
-#endif
+extern CStringMatchApp theApp;
